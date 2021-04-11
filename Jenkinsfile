@@ -11,7 +11,7 @@ pipeline {
           }
 	   stage("sona scaner") {
                steps {
-               withSonarQubeEnv('sonar') {
+               withSonarQubeEnv('sonarscan') {
 		sh "${scannerHome}/bin/sonar-scanner" 
                }
 		waitForQualityGate abortPipeline: true
