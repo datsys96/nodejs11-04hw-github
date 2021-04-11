@@ -11,6 +11,12 @@ pipeline {
                     sh 'docker build -t datsys96/nodejs1104github1 .'
                }
           }
+        stage('Push Image to dockerhub') {
+            steps {
+                withDockerRegistry(credentialsId: 'datsys96', url: 'https://index.docker.io/v1/') {
+                sh 'docker push datsys96/nodejs1104github1:latest'
+                }
+            }
      }
 
     post {
