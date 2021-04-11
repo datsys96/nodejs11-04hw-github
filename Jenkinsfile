@@ -18,6 +18,11 @@ pipeline {
                 }
             }
      }
+	  stage("test junit") {
+               steps {
+                    junit 'test.xml'
+               }
+          }
 }
     post {
         always {
