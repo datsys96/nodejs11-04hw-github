@@ -8,7 +8,7 @@ pipeline {
           }
           stage("build image") {
                steps {
-                    sh 'docker build -t datsys96/nodejs1104github .'
+                    sh 'docker build -t datsys96/nodejs1104github1 .'
                }
           }
      }
