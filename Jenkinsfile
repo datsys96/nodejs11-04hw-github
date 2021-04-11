@@ -1,10 +1,20 @@
 pipeline {
      agent { label 'jenkinslave' }
+     environment {
+        scannerHome = tool 'sonarscan'
+     }
      stages {
           stage("clone code") {
                steps {
                     git 'https://github.com/datsys96/nodejs11-04hw-github.git'
                }
+          }
+	   stage("sona scaner") {
+               steps {
+               withSonarQubeEnv('sonar') {
+		sh "${scannerHome}/bin/sonar-scanner" 
+               }
+		waitForQualityGate abortPipeline: true
           }
           stage("build image") {
                steps {
@@ -18,11 +28,6 @@ pipeline {
                 }
             }
      }
-	  stage("test junit") {
-               steps {
-                    junit 'test.xml'
-               }
-          }
 }
     post {
         always {
